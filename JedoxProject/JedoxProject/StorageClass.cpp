@@ -38,12 +38,12 @@ int StorageClass::get_unique_value(void) {
 
 void StorageClass::print(void) {
     
+    class_mutex.lock();
+    
     if(info() == 0) {
         std::cout << "end of storage reached" << std::endl;
         return;
     }
-
-    class_mutex.lock();
     
     std::map<std::vector<int>, int>::iterator itr = SC.begin();
     print(itr);
@@ -53,14 +53,18 @@ void StorageClass::print(void) {
     class_mutex.unlock();
 }
 
+void StorageClass::read(void) {
+    //do nothing, derived class will have implementation
+}
+
 void StorageClass::print(int idx) {
+    
+    class_mutex.lock();
     
     if(info() == 0) {
         std::cout << "end of storage reached" << std::endl;
         return;
     }
-    
-    class_mutex.lock();
     
     std::map<std::vector<int>, int>::iterator itr = SC.begin();
     std::advance(itr, idx % SC.size());

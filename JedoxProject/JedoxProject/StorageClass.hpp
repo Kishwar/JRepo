@@ -21,6 +21,7 @@ class StorageClass {
     void print(std::map<std::vector<int>, int>::iterator &itr) const;
 public:
     int info(void);
+    virtual void read(void);
 protected:
     std::map<std::vector<int>, int> SC;
     void CountUpdate(int count);
